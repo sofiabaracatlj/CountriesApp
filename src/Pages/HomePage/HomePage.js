@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TableView, GridView, Search, History } from "@mui/icons-material";
+import { TableView, GridView, Search, History, DownloadingOutlined } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import "./HomePage.css";
 import { getAll, getByName } from "../../Services/CountriesService";
@@ -15,6 +15,7 @@ import CountriesGrid from "../../Components/CountriesGrid/CountriesGrid";
 import { useLocation, useHistory, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { update } from "../../GlobalStore/SearchState";
+import useDataToCsvFormat from "../../Hooks/useDataToCsvFormat";
 
 const HomePage = () => {
 
@@ -24,6 +25,8 @@ const HomePage = () => {
   const [dataView, setDataView] = useState("table");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [data, handleStatusChange] = useDataToCsvFormat([]);
+  
 
 
   //Get search from global state
@@ -35,6 +38,12 @@ const HomePage = () => {
     navigate("/history");
   };
 
+  const  GetCsvData = async() =>  {
+    const newData = await handleStatusChange(filteredCountries)
+    console.log(data);
+  }
+
+
   useEffect(() => {
 
     getAll()
@@ -42,6 +51,7 @@ const HomePage = () => {
         setAllCountries(res.data);
         setFilteredCountries(res.data);
         setLoading(false);
+        
       })
       .catch((e) => {
         toggleError();
@@ -84,12 +94,12 @@ const HomePage = () => {
 
   function saveHistory(searchText) {
     let searchInfo = JSON.parse(localStorage.getItem("history")) || [];
-    searchInfo.push({
+    const newSearchInfo = [{
       date: Date.now(),
       text: searchText,
-    });
+    },...searchInfo]
 
-    localStorage.setItem("history", JSON.stringify(searchInfo));
+    localStorage.setItem("history", JSON.stringify(newSearchInfo));
   }
 
   function toggleError() {
@@ -124,6 +134,13 @@ const HomePage = () => {
           </IconButton>
         </div>
         <div className="icon-container">
+        <IconButton
+            size="large"
+            onClick={GetCsvData}
+            aria-label="Download"
+          >
+            <DownloadingOutlined />
+          </IconButton>
           <IconButton
             size="large"
             onClick={handleHistoryButton}

@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    margin: 40px;
+    gap: 20px;
+}
+
+.config-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+}
+
+.icon-container{
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.center-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.alert-error{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}

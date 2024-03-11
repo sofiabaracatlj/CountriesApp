@@ -27,24 +27,24 @@ const CountriesTable = ({ countries }) => {
   const rows = [];
   const columns = [
     { id: "flag", label: "", minWidth: 30 },
-    { id: "name", label: "Nome", minWidth: 100 },
+    { id: "name", label: "Name", minWidth: 100 },
     { id: "capital", label: "Capital", minWidth: 100 },
     {
       id: "population",
-      label: "População",
+      label: "Population",
       minWidth: 50,
       align: "left",
     },
     {
       id: "currency",
-      label: "Moeda",
+      label: "Currency",
       minWidth: 50,
       width: 50,
       align: "left",
     },
     {
       id: "language",
-      label: "Idioma",
+      label: "Language",
       minWidth: 100,
       align: "left",
     },

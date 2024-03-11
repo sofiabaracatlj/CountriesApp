@@ -123,7 +123,7 @@ const HomePage = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             id="outlined-basic"
-            label="Pesquise por nome"
+            label="Search by name"
             variant="outlined"
           />
           <IconButton
